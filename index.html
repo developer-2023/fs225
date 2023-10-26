@@ -1,0 +1,47 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>constructor without new</title>
+</head>
+<body>
+    
+    <script>
+        function Car(brand, model) {
+            this.brand = brand;
+            this.model = model;
+            this.color = "blue";
+
+            this.printInfo = function() {
+                console.log(this.brand, this.model, this.color);
+            }
+        }
+
+        let car = Car("Ford", "Mustang"); // new forgotten!
+        console.log(car); // undefined
+
+        console.log(window.brand); // window object! wrong!
+        window.printInfo(); // window method! wrong!
+
+        function Vehicle(brand, model) {
+
+            if (this instanceof Vehicle == false) {
+                return new Vehicle(brand, model);
+            }
+
+            this.brand = brand;
+            this.model = model;
+            this.color = "blue";
+
+            this.printInfo = function() {
+                console.log(this.brand, this.model, this.color);
+            }
+        }
+
+        let vehicle = Vehicle("GM", "Orion"); // new forgotten!
+        console.log(vehicle); // proper call even if without new
+
+</script>
+</body>
+</html>
